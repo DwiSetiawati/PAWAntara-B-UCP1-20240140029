@@ -1,20 +1,20 @@
 {
-  "name": "ucp-1",
+  "name": "toko-sembako-ariesta",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Website & REST API Toko Sembako Ariesta - UCP1 PAW",
+  "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
-  "keywords": [],
+  "keywords": ["express", "ejs", "rest-api"],
   "author": "",
   "license": "ISC",
-  "type": "commonjs",
   "dependencies": {
-    "ejs": "^6.0.1",
-    "express": "^5.2.1"
+    "ejs": "^3.1.10",
+    "express": "^4.19.2"
   },
   "devDependencies": {
-    "nodemon": "^3.1.14"
+    "nodemon": "^3.1.4"
   }
 }
