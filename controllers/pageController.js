@@ -41,3 +41,12 @@ function renderDashboard(req, res) {
     username: req.session.username,
   });
 }
+
+module.exports = {
+  renderBeranda,
+  renderProdukPage,
+  renderProdukDetail,
+  renderTanyaAI,
+  renderLogin,
+  renderDashboard,
+};
