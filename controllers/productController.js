@@ -9,3 +9,20 @@ function getAllProducts(req, res) {
     data,
   });
 }
+
+function getProductById(req, res) {
+  const id = Number(req.params.id);
+  const produk = productModel.getById(id);
+
+  if (!produk) {
+    return res.status(404).json({
+      status: "error",
+      message: "Produk tidak ditemukan",
+    });
+  }
+
+  res.status(200).json({
+    status: "success",
+    data: produk,
+  });
+}
