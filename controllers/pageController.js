@@ -34,3 +34,10 @@ function renderLogin(req, res) {
   }
   res.render("login", { title: "Login Admin - Toko Sembako Ariesta" });
 }
+
+function renderDashboard(req, res) {
+  res.render("dashboard", {
+    title: "Dashboard Admin - Toko Sembako Ariesta",
+    username: req.session.username,
+  });
+}
