@@ -16,6 +16,9 @@ body {
   background-color: #fdfaf5;
   color: #2b2b2b;
   line-height: 1.6;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 a {
@@ -79,6 +82,13 @@ ul {
   display: block;
   padding: 0.5rem 0;
   color: #fff;
+  border-radius: 6px;
+  transition: background-color 0.15s ease, padding-left 0.15s ease;
+}
+
+.nav-menu li a:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  padding-left: 0.5rem;
 }
 
 .hamburger-btn {
@@ -90,6 +100,12 @@ ul {
   background: none;
   border: none;
   cursor: pointer;
+  border-radius: 4px;
+  transition: opacity 0.15s ease;
+}
+
+.hamburger-btn:hover {
+  opacity: 0.75;
 }
 
 .hamburger-btn span {
@@ -125,11 +141,30 @@ ul {
   font-weight: 600;
   cursor: pointer;
   border: none;
+  transition: background-color 0.15s ease, color 0.15s ease,
+    box-shadow 0.15s ease, transform 0.08s ease, border-color 0.15s ease;
 }
 
 .btn-primary {
   background-color: #2f7d32;
   color: #fff;
+  box-shadow: 0 2px 4px rgba(47, 125, 50, 0.25);
+}
+
+.btn-primary:hover {
+  background-color: #276029; /* lebih gelap saat hover */
+  box-shadow: 0 4px 8px rgba(47, 125, 50, 0.35);
+}
+
+.btn-primary:active {
+  background-color: #1e4a20; /* lebih gelap lagi saat diklik */
+  box-shadow: 0 1px 2px rgba(47, 125, 50, 0.3);
+  transform: translateY(1px); /* efek "tertekan" */
+}
+
+.btn-primary:focus-visible {
+  outline: 3px solid #a5d6a7;
+  outline-offset: 2px;
 }
 
 .btn-secondary {
@@ -138,11 +173,29 @@ ul {
   border: 1px solid #2f7d32;
 }
 
+.btn-secondary:hover {
+  background-color: #e8f5e9; /* hijau muda saat hover */
+  border-color: #1b5e20;
+  color: #1b5e20;
+}
+
+.btn-secondary:active {
+  background-color: #c8e6c9;
+  transform: translateY(1px);
+}
+
+.btn-secondary:focus-visible {
+  outline: 3px solid #a5d6a7;
+  outline-offset: 2px;
+}
+
 /* ============ SECTIONS UMUM ============ */
 main {
   max-width: 1100px;
   margin: 0 auto;
   padding: 2rem 1.25rem;
+  flex: 1 0 auto;
+  width: 100%;
 }
 
 .page-header {
@@ -325,6 +378,175 @@ main {
   height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
+}
+
+/* ============ AUTH (LOGIN) ============ */
+.auth-section {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 0;
+}
+
+.auth-card {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 380px;
+}
+
+.auth-card h1 {
+  color: #1b5e20;
+  margin-bottom: 0.25rem;
+  font-size: 1.4rem;
+}
+
+.auth-subtitle {
+  color: #777;
+  font-size: 0.85rem;
+  margin-bottom: 1rem;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.form-field label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #444;
+}
+
+.form-field input,
+.form-field select {
+  padding: 0.55rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.form-message {
+  min-height: 1.4rem;
+  font-size: 0.85rem;
+  border-radius: 6px;
+  margin-bottom: 0.75rem;
+}
+
+.form-message.error {
+  background-color: #fdecea;
+  color: #c62828;
+  padding: 0.5rem 0.75rem;
+}
+
+.form-message.success {
+  background-color: #e8f5e9;
+  color: #2e7d32;
+  padding: 0.5rem 0.75rem;
+}
+
+/* ============ DASHBOARD ============ */
+.dashboard-form-section {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.dashboard-form-section h2 {
+  color: #1b5e20;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.product-form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+.product-form .form-field {
+  flex: 1 1 180px;
+}
+
+.form-actions {
+  display: flex;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.hidden {
+  display: none;
+}
+
+.btn-danger {
+  background-color: #fff;
+  color: #c62828;
+  border: 1px solid #c62828;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.15s ease, color 0.15s ease, transform 0.08s ease;
+}
+
+.btn-danger:hover {
+  background-color: #c62828;
+  color: #fff;
+}
+
+.btn-danger:active {
+  background-color: #a01f1f;
+  transform: translateY(1px);
+}
+
+.btn-danger:focus-visible {
+  outline: 3px solid #ef9a9a;
+  outline-offset: 2px;
+}
+
+.dashboard-table-section {
+  background-color: #fff;
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 560px;
+}
+
+.product-table th,
+.product-table td {
+  text-align: left;
+  padding: 0.6rem 0.5rem;
+  border-bottom: 1px solid #eee;
+  font-size: 0.9rem;
+}
+
+.product-table th {
+  color: #1b5e20;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+}
+
+.table-actions {
+  display: flex;
+  gap: 0.4rem;
 }
 
 /* ============ FOOTER ============ */
