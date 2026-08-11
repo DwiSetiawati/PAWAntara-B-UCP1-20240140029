@@ -1,19 +1,23 @@
-// routes/api.js
-// Route khusus REST API (response-nya JSON, bukan halaman HTML).
-// Sprint 1: baru GET /api/products (read-only).
-// Sprint 2: baru ditambah GET /:id, POST, PUT, DELETE + proteksi login.
-
 const express = require("express");
 const router = express.Router();
-const products = require("../data/products");
 
-// GET /api/products -> kembalikan seluruh data produk dalam format JSON konsisten
-// Format response mengikuti kontrak di PRD Bagian 7: { status, data }
-router.get("/products", (req, res) => {
-  res.status(200).json({
-    status: "success",
-    data: products,
-  });
-});
+const productController = require("../controllers/productController");
+const authController = require("../controllers/authController");
+const chatController = require("../controllers/chatController");
+const { requireLoginApi } = require("../middleware/auth");
+
+// ---- Auth ----
+router.post("/login", authController.login);
+router.post("/logout", requireLoginApi, authController.logout);
+
+// ---- Produk (publik: GET, terproteksi: POST/PUT/DELETE) ----
+router.get("/products", productController.getAllProducts);
+router.get("/products/:id", productController.getProductById);
+router.post("/products", requireLoginApi, productController.createProduct);
+router.put("/products/:id", requireLoginApi, productController.updateProduct);
+router.delete("/products/:id", requireLoginApi, productController.deleteProduct);
+
+// ---- Chat dummy (publik) ----
+router.post("/chat", chatController.chat);
 
 module.exports = router;
