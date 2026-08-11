@@ -32,3 +32,24 @@ const rules = [
 
 const defaultReply =
   "Maaf, saya belum paham pertanyaan itu. Coba tanya soal jam buka, ongkir, cara pembayaran, atau stok produk ya!";
+
+function findReply(pertanyaan) {
+  const teks = pertanyaan.toLowerCase();
+
+  const semuaProduk = productModel.getAll();
+  const produkDitemukan = semuaProduk.find((p) =>
+    teks.includes(p.name.toLowerCase().split(" ")[0].toLowerCase())
+  );
+
+  if (produkDitemukan && (teks.includes("harga") || teks.includes("berapa"))) {
+    return `${produkDitemukan.name} harganya Rp ${produkDitemukan.price.toLocaleString(
+      "id-ID"
+    )}, stok tersedia ${produkDitemukan.stock}.`;
+  }
+
+  const aturanCocok = rules.find((rule) =>
+    rule.keywords.some((kw) => teks.includes(kw))
+  );
+
+  return aturanCocok ? aturanCocok.reply : defaultReply;
+}
