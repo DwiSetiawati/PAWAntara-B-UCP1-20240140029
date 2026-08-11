@@ -29,3 +29,7 @@ function getAll({ kategori, search } = {}) {
 function getById(id) {
   return products.find((p) => p.id === id) || null;
 }
+
+function getKategoriList() {
+  return [...new Set(products.map((p) => p.category))];
+}
