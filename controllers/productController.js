@@ -26,3 +26,30 @@ function getProductById(req, res) {
     data: produk,
   });
 }
+
+function createProduct(req, res) {
+  const { name, category, price, stock } = req.body;
+
+  if (!name || !category || price === undefined || stock === undefined) {
+    return res.status(400).json({
+      status: "error",
+      message: "Field name, category, price, dan stock wajib diisi",
+    });
+  }
+
+  if (isNaN(Number(price)) || isNaN(Number(stock))) {
+    return res.status(400).json({
+      status: "error",
+      message: "Price dan stock harus berupa angka",
+    });
+  }
+
+  const namaKapital = name.charAt(0).toUpperCase() + name.slice(1);
+  const produkBaru = productModel.create({ name: namaKapital, category, price, stock });
+
+  res.status(201).json({
+    status: "success",
+    message: "Produk ditambahkan",
+    data: produkBaru,
+  });
+}
