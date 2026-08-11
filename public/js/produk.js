@@ -31,4 +31,27 @@ document.addEventListener("DOMContentLoaded", function () {
       console.error("Gagal memuat kategori:", err);
     }
   }
+
+  async function loadProducts() {
+    container.innerHTML = '<p class="empty-state">Memuat produk...</p>';
+
+    const kategori = kategoriSelect.value;
+    const search = searchInput.value.trim();
+
+    const params = new URLSearchParams();
+    if (kategori) params.set("kategori", kategori);
+    if (search) params.set("search", search);
+
+    try {
+      const res = await fetch(`/api/products?${params.toString()}`);
+      const data = await res.json();
+      renderProducts(data.data);
+
+      const newUrl = params.toString() ? `/produk?${params.toString()}` : "/produk";
+      window.history.replaceState({}, "", newUrl);
+    } catch (err) {
+      container.innerHTML =
+        '<p class="empty-state">Gagal memuat produk. Coba refresh halaman.</p>';
+    }
+  }
 });
