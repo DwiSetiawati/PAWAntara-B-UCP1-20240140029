@@ -14,3 +14,5 @@ function requireLoginApi(req, res, next) {
     message: "Unauthorized, silakan login terlebih dahulu",
   });
 }
+
+module.exports = { requireLoginPage, requireLoginApi };
