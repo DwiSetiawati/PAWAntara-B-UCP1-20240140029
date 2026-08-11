@@ -27,3 +27,19 @@ function login(req, res) {
     message: "Login berhasil",
   });
 }
+
+function logout(req, res) {
+  req.session.destroy((err) => {
+    if (err) {
+      return res.status(500).json({
+        status: "error",
+        message: "Gagal logout, coba lagi",
+      });
+    }
+    res.clearCookie("connect.sid");
+    res.status(200).json({
+      status: "success",
+      message: "Logout berhasil",
+    });
+  });
+}
