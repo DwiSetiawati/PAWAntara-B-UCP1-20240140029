@@ -7,3 +7,5 @@ function validateCredentials(username, password) {
   if (username !== ADMIN_USERNAME) return false;
   return bcrypt.compareSync(password, ADMIN_PASSWORD_HASH);
 }
+
+module.exports = { validateCredentials };
