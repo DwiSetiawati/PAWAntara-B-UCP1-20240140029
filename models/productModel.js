@@ -7,3 +7,21 @@ let products = [
   { id: 6, name: "Kopi Bubuk ABC 165gr", category: "minuman", price: 12500, stock: 40 },
   { id: 7, name: "Mie Instan Indomie Goreng (1 dus)", category: "makanan", price: 110000, stock: 10 },
 ];
+
+
+// Ambil semua produk, dengan filter opsional kategori & search (dipakai baik oleh halaman server-render maupun endpoint API).
+function getAll({ kategori, search } = {}) {
+  let hasil = products;
+
+  if (kategori) {
+    hasil = hasil.filter(
+      (p) => p.category.toLowerCase() === kategori.toLowerCase()
+    );
+  }
+  if (search) {
+    hasil = hasil.filter((p) =>
+      p.name.toLowerCase().includes(search.toLowerCase())
+    );
+  }
+  return hasil;
+}
