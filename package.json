@@ -7,12 +7,19 @@
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
-  "keywords": ["express", "ejs", "rest-api"],
+  "keywords": [
+    "express",
+    "ejs",
+    "rest-api"
+  ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.4.2",
     "ejs": "^3.1.10",
-    "express": "^4.19.2"
+    "express": "^4.19.2",
+    "express-session": "^1.19.0"
   },
   "devDependencies": {
     "nodemon": "^3.1.4"
