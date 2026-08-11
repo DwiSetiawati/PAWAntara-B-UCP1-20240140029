@@ -81,4 +81,9 @@ document.addEventListener("DOMContentLoaded", function () {
     e.preventDefault(); // FR-17: cegah reload halaman
     loadProducts();
   });
+
+  resetBtn.addEventListener("click", function () {
+    filterForm.reset();
+    loadProducts();
+  });
 });
