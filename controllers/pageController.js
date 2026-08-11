@@ -7,3 +7,9 @@ function renderBeranda(req, res) {
     previewProducts,
   });
 }
+
+function renderProdukPage(req, res) {
+  res.render("produk", {
+    title: "Produk - Toko Sembako Ariesta",
+  });
+}
