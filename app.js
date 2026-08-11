@@ -1,8 +1,10 @@
 // app.js
 // Ini adalah "pintu masuk" aplikasi. Semua konfigurasi server dikumpulkan di sini.
+require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
+const session = require("express-session");
 
 const requestLogger = require("./middleware/logger");
 const webRoutes = require("./routes/web");
@@ -12,27 +14,41 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 // ---- View Engine ----
-// Kita pakai EJS supaya bisa render HTML dinamis dari data server (bukan HTML statis).
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 // ---- Middleware bawaan Express ----
-// Supaya bisa membaca data form (application/x-www-form-urlencoded) dan JSON body
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// ---- Middleware custom (FR-08) ----
-// Mencatat setiap request yang masuk ke terminal
+// ---- Session (untuk fitur login) ----
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+      maxAge: 1000 * 60 * 60, // 1 jam
+    },
+  })
+);
+
+// Supaya semua view (termasuk partial navbar) tahu status login user,
+// tanpa harus manual passing di tiap res.render()
+app.use((req, res, next) => {
+  res.locals.isLoggedIn = !!(req.session && req.session.isLoggedIn);
+  next();
+});
+
+// ---- Middleware custom ----
 app.use(requestLogger);
 
 // ---- Static files ----
-// File CSS/JS/gambar di folder public/ bisa diakses langsung lewat browser
-// Contoh: public/css/style.css -> diakses di /css/style.css
 app.use(express.static(path.join(__dirname, "public")));
 
 // ---- Routing ----
-// Route halaman (render EJS)
 app.use("/", webRoutes);
+app.use("/api", apiRoutes);
 
 // Route API (response JSON), semua diawali /api
 app.use("/api", apiRoutes);
