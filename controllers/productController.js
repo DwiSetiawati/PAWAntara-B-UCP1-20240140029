@@ -83,3 +83,20 @@ function updateProduct(req, res) {
     data: produk,
   });
 }
+
+function deleteProduct(req, res) {
+  const id = Number(req.params.id);
+  const berhasil = productModel.remove(id);
+
+  if (!berhasil) {
+    return res.status(404).json({
+      status: "error",
+      message: "Produk tidak ditemukan",
+    });
+  }
+
+  res.status(200).json({
+    status: "success",
+    message: "Produk dihapus",
+  });
+}
