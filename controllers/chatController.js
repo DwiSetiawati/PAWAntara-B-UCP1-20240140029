@@ -53,3 +53,21 @@ function findReply(pertanyaan) {
 
   return aturanCocok ? aturanCocok.reply : defaultReply;
 }
+
+function chat(req, res) {
+  const { pertanyaan } = req.body;
+
+  if (!pertanyaan || pertanyaan.trim() === "") {
+    return res.status(400).json({
+      status: "error",
+      message: "Pertanyaan tidak boleh kosong",
+    });
+  }
+
+  const reply = findReply(pertanyaan);
+
+  res.status(200).json({
+    status: "success",
+    data: { reply },
+  });
+}
