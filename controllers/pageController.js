@@ -13,3 +13,13 @@ function renderProdukPage(req, res) {
     title: "Produk - Toko Sembako Ariesta",
   });
 }
+
+function renderProdukDetail(req, res) {
+  const id = Number(req.params.id);
+  const produk = productModel.getById(id);
+
+  res.render("produk-detail", {
+    title: produk ? produk.name : "Produk Tidak Ditemukan",
+    produk,
+  });
+}
