@@ -100,3 +100,11 @@ function deleteProduct(req, res) {
     message: "Produk dihapus",
   });
 }
+
+module.exports = {
+  getAllProducts,
+  getProductById,
+  createProduct,
+  updateProduct,
+  deleteProduct,
+};
