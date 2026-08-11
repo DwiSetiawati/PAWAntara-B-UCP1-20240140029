@@ -14,59 +14,37 @@
       <h1>Daftar Produk</h1>
     </section>
 
-    <!-- Form filter: GET biasa, jadi hasilnya muncul di query string (?kategori=&search=) -->
     <section class="filter-section" aria-label="Filter produk">
-      <form action="/produk" method="GET" class="filter-form">
+      <form id="filterForm" class="filter-form">
         <div class="filter-field">
           <label for="search">Cari produk</label>
-          <input
-            type="text"
-            id="search"
-            name="search"
-            placeholder="contoh: beras"
-            value="<%= searchAktif %>"
-          />
+          <input type="text" id="search" name="search" placeholder="contoh: beras" />
         </div>
 
         <div class="filter-field">
           <label for="kategori">Kategori</label>
           <select id="kategori" name="kategori">
             <option value="">Semua Kategori</option>
-            <% kategoriList.forEach(function(k) { %>
-              <option value="<%= k %>" <%= kategoriAktif === k ? 'selected' : '' %>>
-                <%= k %>
-              </option>
-            <% }) %>
+            <!-- opsi kategori diisi dinamis lewat JS, karena datanya
+                 sekarang datang dari API, bukan dari server-render -->
           </select>
         </div>
 
         <button type="submit" class="btn-primary">Terapkan Filter</button>
-        <a href="/produk" class="btn-secondary">Reset</a>
+        <button type="button" id="resetFilterBtn" class="btn-secondary">Reset</button>
       </form>
     </section>
 
-    <!-- Daftar produk hasil filter -->
+    <!-- Daftar produk, diisi lewat JS dari GET /api/products -->
     <section class="product-list-section">
-      <% if (products.length === 0) { %>
-        <p class="empty-state">Tidak ada produk yang cocok dengan filter kamu.</p>
-      <% } else { %>
-        <div class="product-grid">
-          <% products.forEach(function(p) { %>
-            <article class="product-card">
-              <div class="product-icon">📦</div>
-              <h3><%= p.name %></h3>
-              <p class="product-category"><%= p.category %></p>
-              <p class="product-price">Rp <%= p.price.toLocaleString('id-ID') %></p>
-              <p class="product-stock">Stok: <%= p.stock %></p>
-              <a href="/produk/<%= p.id %>" class="btn-secondary">Lihat Detail</a>
-            </article>
-          <% }) %>
-        </div>
-      <% } %>
+      <div id="productContainer" class="product-grid" aria-live="polite">
+        <p class="empty-state">Memuat produk...</p>
+      </div>
     </section>
   </main>
 
   <%- include('partials/footer') %>
   <script src="/js/main.js"></script>
+  <script src="/js/produk.js"></script>
 </body>
 </html>
