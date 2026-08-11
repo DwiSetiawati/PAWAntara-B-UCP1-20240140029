@@ -70,3 +70,10 @@ function update(id, { name, category, price, stock }) {
 
   return produk;
 }
+
+function remove(id) {
+  const index = products.findIndex((p) => p.id === id);
+  if (index === -1) return false;
+  products.splice(index, 1);
+  return true;
+}
