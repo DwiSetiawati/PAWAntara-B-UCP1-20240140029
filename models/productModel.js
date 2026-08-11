@@ -77,3 +77,12 @@ function remove(id) {
   products.splice(index, 1);
   return true;
 }
+
+module.exports = {
+  getAll,
+  getById,
+  getKategoriList,
+  create,
+  update,
+  remove,
+};
