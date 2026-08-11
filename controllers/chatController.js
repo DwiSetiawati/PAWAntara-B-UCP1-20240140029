@@ -71,3 +71,5 @@ function chat(req, res) {
     data: { reply },
   });
 }
+
+module.exports = { chat };
