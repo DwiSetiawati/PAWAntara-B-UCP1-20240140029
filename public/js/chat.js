@@ -41,4 +41,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     chatBox.scrollTop = chatBox.scrollHeight;
   });
+
+  function addBubble(text, sender) {
+    const bubble = document.createElement("div");
+    bubble.className = `chat-bubble ${sender}`;
+    bubble.textContent = text;
+    chatBox.appendChild(bubble);
+    chatBox.scrollTop = chatBox.scrollHeight;
+    return bubble;
+  }
 });
