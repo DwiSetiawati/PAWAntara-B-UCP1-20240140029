@@ -54,4 +54,26 @@ document.addEventListener("DOMContentLoaded", function () {
         '<p class="empty-state">Gagal memuat produk. Coba refresh halaman.</p>';
     }
   }
+
+  function renderProducts(products) {
+    if (products.length === 0) {
+      container.innerHTML =
+        '<p class="empty-state">Tidak ada produk yang cocok dengan filter kamu.</p>';
+      return;
+    }
+
+    container.innerHTML = products
+      .map(
+        (p) => `
+        <article class="product-card">
+          <h3>${escapeHtml(p.name)}</h3>
+          <p class="product-category">${escapeHtml(p.category)}</p>
+          <p class="product-price">Rp ${p.price.toLocaleString("id-ID")}</p>
+          <p class="product-stock">Stok: ${p.stock}</p>
+          <a href="/produk/${p.id}" class="btn-secondary">Lihat Detail</a>
+        </article>
+      `
+      )
+      .join("");
+  }
 });
