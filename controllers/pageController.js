@@ -27,3 +27,10 @@ function renderProdukDetail(req, res) {
 function renderTanyaAI(req, res) {
   res.render("tanya-ai", { title: "Tanya AI - Toko Sembako Ariesta" });
 }
+
+function renderLogin(req, res) {
+  if (req.session && req.session.isLoggedIn) {
+    return res.redirect("/dashboard");
+  }
+  res.render("login", { title: "Login Admin - Toko Sembako Ariesta" });
+}
