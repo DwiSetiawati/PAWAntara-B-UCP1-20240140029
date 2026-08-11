@@ -25,3 +25,7 @@ function getAll({ kategori, search } = {}) {
   }
   return hasil;
 }
+
+function getById(id) {
+  return products.find((p) => p.id === id) || null;
+}
