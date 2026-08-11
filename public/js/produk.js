@@ -76,4 +76,9 @@ document.addEventListener("DOMContentLoaded", function () {
       )
       .join("");
   }
+
+  filterForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // FR-17: cegah reload halaman
+    loadProducts();
+  });
 });
