@@ -29,3 +29,6 @@ const rules = [
     reply: "Sama-sama! Senang bisa membantu.",
   },
 ];
+
+const defaultReply =
+  "Maaf, saya belum paham pertanyaan itu. Coba tanya soal jam buka, ongkir, cara pembayaran, atau stok produk ya!";
