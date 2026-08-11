@@ -58,3 +58,15 @@ function create({ name, category, price, stock }) {
   products.push(produkBaru);
   return produkBaru;
 }
+
+function update(id, { name, category, price, stock }) {
+  const produk = getById(id);
+  if (!produk) return null;
+
+  if (name !== undefined) produk.name = name;
+  if (category !== undefined) produk.category = category;
+  if (price !== undefined) produk.price = Number(price);
+  if (stock !== undefined) produk.stock = Number(stock);
+
+  return produk;
+}
