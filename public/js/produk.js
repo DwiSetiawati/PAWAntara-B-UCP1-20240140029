@@ -9,4 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
   const kategoriDariUrl = urlParams.get("kategori") || "";
   const searchDariUrl = urlParams.get("search") || "";
   searchInput.value = searchDariUrl;
+
+  loadKategoriOptions(kategoriDariUrl).then(() => {
+    loadProducts();
+  });
+
 });
