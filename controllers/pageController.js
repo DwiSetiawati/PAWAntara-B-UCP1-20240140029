@@ -23,3 +23,7 @@ function renderProdukDetail(req, res) {
     produk,
   });
 }
+
+function renderTanyaAI(req, res) {
+  res.render("tanya-ai", { title: "Tanya AI - Toko Sembako Ariesta" });
+}
