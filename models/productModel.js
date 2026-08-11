@@ -33,3 +33,28 @@ function getById(id) {
 function getKategoriList() {
   return [...new Set(products.map((p) => p.category))];
 }
+
+function create({ name, category, price, stock }) {
+  // Cari ID terkecil yang kosong (mulai dari angka 1)
+  let newId = 1;
+  const existingIds = products.map((p) => p.id).sort((a, b) => a - b);
+
+  for (let i = 0; i < existingIds.length; i++) {
+    if (existingIds[i] === newId) {
+      newId++;
+    } else {
+      break;
+    }
+  }
+
+  const produkBaru = {
+    id: newId, // Pakai ID baru yang sudah dicek
+    name,
+    category,
+    price: Number(price),
+    stock: Number(stock),
+  };
+  
+  products.push(produkBaru);
+  return produkBaru;
+}
